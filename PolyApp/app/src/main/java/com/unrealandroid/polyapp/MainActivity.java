@@ -121,20 +121,13 @@ public class MainActivity extends AppCompatActivity {
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 
             try {
-                NewsDBHelper dbHelper1 = new NewsDBHelper(getActivity(), "newsDB.db");
-                ProjectDBHelper dbHelper2 = new ProjectDBHelper(getActivity(), "project.db");
-                EventDBHelper dbHelper = new EventDBHelper(getActivity(), "events.db");
+                DBHelper dbHelper = new DBHelper(getActivity());
                 dbHelper.createDataBase();
                 dbHelper.openDataBase();
-
-                dbHelper1.createDataBase();
-                dbHelper1.openDataBase();
-
-                dbHelper2.createDataBase();
-                dbHelper2.openDataBase();
-
-                textView.setText(dbHelper.test() + " " + dbHelper1.test() + " " + dbHelper2.test());
-            } catch (Exception e) {}
+                textView.setText(dbHelper.testNews() + " " + dbHelper.testProject() + " " + dbHelper.testEvent());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             return rootView;
         }

@@ -17,14 +17,13 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected String DB_NAME;
+    protected static String DB_NAME = "dbApp.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;
 
-    public DBHelper(Context context, String DB_NAME) throws SQLException, IOException {
+    public DBHelper(Context context) throws SQLException, IOException {
         super(context, DB_NAME, null, 1);
-        this.DB_NAME = DB_NAME;
         this.myContext = context;
     }
 
@@ -93,5 +92,23 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public  SQLiteDatabase getMyDataBase(){
         return myDataBase;
+    }
+
+    public String testNews(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM News", null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("title"));
+    }
+
+    public String testProject(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Project", null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("title"));
+    }
+
+    public String testEvent(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
+        cursor.moveToFirst();
+        return cursor.getString(cursor.getColumnIndex("title"));
     }
 }
