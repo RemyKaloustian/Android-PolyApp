@@ -118,7 +118,24 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            try {
+                NewsDBHelper dbHelper1 = new NewsDBHelper(getActivity(), "newsDB.db");
+                ProjectDBHelper dbHelper2 = new ProjectDBHelper(getActivity(), "project.db");
+                EventDBHelper dbHelper = new EventDBHelper(getActivity(), "events.db");
+                dbHelper.createDataBase();
+                dbHelper.openDataBase();
+
+                dbHelper1.createDataBase();
+                dbHelper1.openDataBase();
+
+                dbHelper2.createDataBase();
+                dbHelper2.openDataBase();
+
+                textView.setText(dbHelper.test() + " " + dbHelper1.test() + " " + dbHelper2.test());
+            } catch (Exception e) {}
+
             return rootView;
         }
     }
@@ -143,18 +160,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "ACCUEIL";
                 case 1:
-                    return "SECTION 2";
+                    return "NEWS";
                 case 2:
-                    return "SECTION 3";
+                    return "PROJETS";
+                case 3:
+                    return "EVENTS";
             }
             return null;
         }
