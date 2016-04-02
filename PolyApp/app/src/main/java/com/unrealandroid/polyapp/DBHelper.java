@@ -12,12 +12,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected static String DB_NAME = "dbApp.db";
+    protected static String DB_NAME = "dbApps.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;
@@ -110,5 +109,22 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
         cursor.moveToFirst();
         return cursor.getString(cursor.getColumnIndex("title"));
+    }
+
+
+    public Event getEvent(Cursor cursor){
+        cursor.moveToFirst();
+        return new Event(
+                cursor.getInt(cursor.getColumnIndex("_id")),
+                cursor.getString(cursor.getColumnIndex("title")),
+                cursor.getString(cursor.getColumnIndex("content")),
+                cursor.getInt(cursor.getColumnIndex("location-lat")),
+                cursor.getInt(cursor.getColumnIndex("location-long")));
+    }
+
+    public Cursor getEventCursor(){
+        Cursor cursor =  myDataBase.rawQuery("SELECT * FROM Event", null);
+        cursor.moveToFirst();
+        return cursor;
     }
 }

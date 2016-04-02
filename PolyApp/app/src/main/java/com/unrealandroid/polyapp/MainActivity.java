@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -147,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            if(position == 3)
+                return EventListFragment.newInstance(position+1);
             return PlaceholderFragment.newInstance(position + 1);
         }
 
