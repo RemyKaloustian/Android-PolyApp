@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.unrealandroid.polyapp.event.Event;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -120,6 +122,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex("content")),
                 cursor.getInt(cursor.getColumnIndex("location-lat")),
                 cursor.getInt(cursor.getColumnIndex("location-long")));
+    }
+
+    public ArrayList<Event> getAllEvent(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
+        ArrayList<Event> listArticle = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            listArticle.add(new Event(cursor.getInt(cursor.getColumnIndex("_id")),
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")),
+                    cursor.getInt(cursor.getColumnIndex("location-lat")),
+                    cursor.getInt(cursor.getColumnIndex("location-long"))));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return listArticle;
     }
 
     public Cursor getEventCursor(){
