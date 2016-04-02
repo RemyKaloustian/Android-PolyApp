@@ -1,6 +1,7 @@
 package com.unrealandroid.polyapp.event;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unrealandroid.polyapp.AsyncTaskImage;
+import com.unrealandroid.polyapp.MainActivity;
 import com.unrealandroid.polyapp.R;
 
 import java.util.List;
@@ -31,6 +33,14 @@ public class EventCustomAdapter extends ArrayAdapter<Event> {
 
         TextView title = (TextView) convertView.findViewById(R.id.eventTitle);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageEvent);
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SingleEvent.class);
+                getContext().startActivity(intent);
+            }
+        });
         TextView info = (TextView) convertView.findViewById(R.id.eventContentPreview);
 
         AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
