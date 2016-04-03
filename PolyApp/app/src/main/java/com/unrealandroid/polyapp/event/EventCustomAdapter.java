@@ -30,7 +30,7 @@ public class EventCustomAdapter extends ArrayAdapter<Event> {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.event_preview, null);
         }
-        Event event = getItem(position);
+        final Event event = getItem(position);
 
         TextView title = (TextView) convertView.findViewById(R.id.eventTitle);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageEvent);
@@ -39,6 +39,7 @@ public class EventCustomAdapter extends ArrayAdapter<Event> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SingleEvent.class);
+                intent.putExtra("IdEvent", event.getId());
                 getContext().startActivity(intent);
             }
         });

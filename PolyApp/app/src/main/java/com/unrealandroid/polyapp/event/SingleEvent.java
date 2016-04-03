@@ -1,6 +1,7 @@
 package com.unrealandroid.polyapp.event;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -19,8 +20,10 @@ public class SingleEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        int idEvent = intent.getIntExtra("IdEvent", 1);
         setContentView(R.layout.single_event);
         TextView textView = (TextView) findViewById(R.id.textEventsss);
-        textView.setText("Coucou toi");
+        textView.setText("Coucou toi" + idEvent);
     }
 }
