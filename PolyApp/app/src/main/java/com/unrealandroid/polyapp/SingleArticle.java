@@ -51,8 +51,10 @@ public class SingleArticle extends Fragment{
 
         ImageView image = (ImageView)rootView.findViewById(R.id.ArticleImage);
 
-        
-        image.setImageBitmap(new Bitmap());
+        AsyncTaskImage img = new AsyncTaskImage(image);
+        img.execute(_article._pathToImage);
+
+
 
 
 

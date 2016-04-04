@@ -145,4 +145,19 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
+    public Article getArticle(String id) {
+
+        Cursor cu = myDataBase.rawQuery("SELECT * FROM News WHERE _id = " + id , null);
+        cu.moveToFirst();
+
+        Article toReturn  = new Article(
+            cu.getString(cu.getColumnIndex("title")),
+                cu.getString(cu.getColumnIndex("content")),
+                cu.getString(cu.getColumnIndex("imagePath"))
+
+        );
+
+        return toReturn;
+    }
 }
