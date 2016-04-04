@@ -139,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == 3)
                 return EventListFragment.newInstance(position + 1);
+            /*else if(position == 2)
+                return*/
             return PlaceholderFragment.newInstance(position + 1);
         }
 
