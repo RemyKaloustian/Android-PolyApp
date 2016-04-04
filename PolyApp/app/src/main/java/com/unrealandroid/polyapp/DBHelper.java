@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.unrealandroid.polyapp.event.Event;
+import com.unrealandroid.polyapp.projet_news.Project;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -138,6 +139,21 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         return listArticle;
+    }
+
+    public ArrayList<Project> getAllProject(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Project", null);
+        ArrayList<Project> listProject = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")),
+                    cursor.getString(cursor.getColumnIndex("imagePath"))));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return listProject;
     }
 
     public Cursor getEventCursor(){
