@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.unrealandroid.polyapp.event.EventListFragment;
+import com.unrealandroid.polyapp.projet_news.ProjectListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -139,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == 3)
                 return EventListFragment.newInstance(position + 1);
-            /*else if(position == 2)
-                return*/
+            else if(position == 2)
+                return ProjectListFragment.newInstance(position + 1);
             return PlaceholderFragment.newInstance(position + 1);
         }
 
