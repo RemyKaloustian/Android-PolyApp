@@ -46,6 +46,9 @@ public class SingleArticle extends Fragment{
         TextView title = (TextView)rootView.findViewById(R.id.ArticleTitle);
         title.setText(_article._title);
 
+        TextView date = (TextView)rootView.findViewById(R.id.ArticleDate);
+        title.setText(_article._date);
+
         TextView content = (TextView)rootView.findViewById(R.id.ArticleContent);
         content.setText(_article._content);
 

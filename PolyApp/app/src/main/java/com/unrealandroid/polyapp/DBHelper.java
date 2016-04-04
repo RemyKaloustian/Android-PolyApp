@@ -151,10 +151,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cu = myDataBase.rawQuery("SELECT * FROM News WHERE _id = " + id , null);
         cu.moveToFirst();
 
+        //TODO : Get also the date
+
         Article toReturn  = new Article(
             cu.getString(cu.getColumnIndex("title")),
                 cu.getString(cu.getColumnIndex("content")),
-                cu.getString(cu.getColumnIndex("imagePath"))
+                cu.getString(cu.getColumnIndex("imagePath")),
+                cu.getString(cu.getColumnIndex("date"))
 
         );
 

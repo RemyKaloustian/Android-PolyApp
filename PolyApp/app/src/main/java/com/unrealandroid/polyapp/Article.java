@@ -8,10 +8,14 @@ public class Article {
     String _pathToImage;
     String _title;
     String _content;
+    String _date;
 
-    public Article(String _pathToImage, String _title, String _content) {
-        this._pathToImage = _pathToImage;
-        this._title = _title;
-        this._content = _content;
+    public Article(String pathToImage, String title, String content, String date) {
+        _pathToImage =  pathToImage;
+        _title = title;
+        _content = content;
+        _date = date;
     }
+
+
 }//class Article
