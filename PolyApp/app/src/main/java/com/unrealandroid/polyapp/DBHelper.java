@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.unrealandroid.polyapp.event.Event;
+import com.unrealandroid.polyapp.projet_news.Project;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -140,9 +141,42 @@ public class DBHelper extends SQLiteOpenHelper {
         return listArticle;
     }
 
+    public ArrayList<Project> getAllProject(){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Project", null);
+        ArrayList<Project> listProject = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")),
+                    cursor.getString(cursor.getColumnIndex("imagePath"))));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return listProject;
+    }
+
     public Cursor getEventCursor(){
         Cursor cursor =  myDataBase.rawQuery("SELECT * FROM Event", null);
         cursor.moveToFirst();
         return cursor;
+    }
+
+    public Article getArticle(String id) {
+
+        Cursor cu = myDataBase.rawQuery("SELECT * FROM News WHERE _id = " + id , null);
+        cu.moveToFirst();
+
+        //TODO : Get also the date
+
+        Article toReturn  = new Article(
+            cu.getString(cu.getColumnIndex("title")),
+                cu.getString(cu.getColumnIndex("content")),
+                cu.getString(cu.getColumnIndex("imagePath")),
+                cu.getString(cu.getColumnIndex("date"))
+
+        );
+
+        return toReturn;
     }
 }
