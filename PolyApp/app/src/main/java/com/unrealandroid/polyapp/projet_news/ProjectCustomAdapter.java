@@ -46,7 +46,7 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project> {
         TextView info = (TextView) convertView.findViewById(R.id.projectContentPreview);
 
         AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
-        asyncTaskImage.execute("http://dbseventsinc.com/wp-content/uploads/2015/12/event-services-banner.jpg");
+        asyncTaskImage.execute(project.getImage());
         title.setText(project.getTitle());
         info.setText(project.getContent());
 
