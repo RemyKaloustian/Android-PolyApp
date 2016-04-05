@@ -35,14 +35,14 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project> {
         TextView title = (TextView) convertView.findViewById(R.id.projectTitle);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageProject);
 
-        image.setOnClickListener(new View.OnClickListener() {
+        /*image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SingleEvent.class);
                 intent.putExtra("IdEvent", project.getId());
                 getContext().startActivity(intent);
             }
-        });
+        });*/
         TextView info = (TextView) convertView.findViewById(R.id.projectContentPreview);
 
         AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
