@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
@@ -55,9 +54,8 @@ public class ProjectListFragment extends Fragment {
             ProjectCustomAdapter projectCustomAdapter = new ProjectCustomAdapter(getActivity(), 0, dbHelper.getAllProject());
             ListView listView = (ListView) getView().findViewById(R.id.projectList);
             listView.setAdapter(projectCustomAdapter);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }

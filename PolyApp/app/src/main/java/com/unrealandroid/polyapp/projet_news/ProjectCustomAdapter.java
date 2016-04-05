@@ -30,7 +30,7 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project> {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.project_preview, null);
         }
-        final Project project = getItem(position);
+        Project project = getItem(position);
 
         TextView title = (TextView) convertView.findViewById(R.id.projectTitle);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageProject);
