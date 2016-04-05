@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected static String DB_NAME = "dbapps.db";
+    protected static String DB_NAME = "dbApps.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;
@@ -146,7 +146,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<Project> listProject = new ArrayList<>();
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("id")),
+            listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("_id")),
                     cursor.getString(cursor.getColumnIndex("title")),
                     cursor.getString(cursor.getColumnIndex("content")),
                     cursor.getString(cursor.getColumnIndex("imagePath"))));
