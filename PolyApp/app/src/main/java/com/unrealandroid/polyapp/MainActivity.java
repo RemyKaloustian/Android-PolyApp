@@ -1,5 +1,6 @@
 package com.unrealandroid.polyapp;
 
+import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -116,7 +117,10 @@ public class MainActivity extends AppCompatActivity {
                 DBHelper dbHelper = new DBHelper(getActivity());
                 dbHelper.createDataBase();
                 dbHelper.openDataBase();
-                textView.setText(dbHelper.testNews() + " " + dbHelper.testProject() + " " + dbHelper.testEvent());
+                //textView.setText(dbHelper.testNews() + " " + dbHelper.testProject() + " " + dbHelper.testEvent());
+                textView.setText("Remy & Anthonny not found. Please press F2 for help.");
+                textView.setTypeface(null, Typeface.BOLD);
+                textView.setTextSize(30);
             } catch (Exception e) {
                 e.printStackTrace();
             }
