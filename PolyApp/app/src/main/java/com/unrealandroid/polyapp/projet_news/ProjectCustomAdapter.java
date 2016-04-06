@@ -26,10 +26,13 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         if(convertView == null){
             convertView = inflater.inflate(R.layout.project_preview, null);
         }
+
         Project project = getItem(position);
 
         TextView title = (TextView) convertView.findViewById(R.id.projectTitle);

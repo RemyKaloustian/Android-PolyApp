@@ -38,7 +38,7 @@ public class ProjectListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_project_list, container, false);
+        View rootView = inflater.inflate(R.layout.project_list, container, false);
 
         return rootView;
     }
