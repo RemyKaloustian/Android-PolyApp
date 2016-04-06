@@ -156,13 +156,56 @@ public class DBHelper extends SQLiteOpenHelper {
         return listProject;
     }
 
+    public Article getArticle(int id){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM News", null);
+        ArrayList<Article> listArticle = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            listArticle.add(new Article(cursor.getInt(cursor.getColumnIndex("_id")),
+                    cursor.getString(cursor.getColumnIndex("imagePath")),
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")),
+                    "date"));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        System.out.println("Size = " + listArticle.size());
+        for (int i = 0; i < listArticle.size(); ++i){
+            if(listArticle.get(i)._id == id)
+                return listArticle.get(i);
+        }
+        return null;
+    }
+
+    public Event getEvent(int id){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
+        //ArrayList<Event> listEvent = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            if(cursor.getInt(cursor.getColumnIndex("_id")) == id){
+                Event event = new Event(cursor.getInt(cursor.getColumnIndex("_id")),
+                        cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("content")),
+                        cursor.getInt(cursor.getColumnIndex("location-lat")),
+                        cursor.getInt(cursor.getColumnIndex("location-long")));
+                cursor.close();
+                return event;
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return null;
+    }
+
+
     public Cursor getEventCursor(){
         Cursor cursor =  myDataBase.rawQuery("SELECT * FROM Event", null);
         cursor.moveToFirst();
         return cursor;
     }
 
-    public Article getArticle(String id) {
+    /*public Article getArticle(int id) {
 
         Cursor cu = myDataBase.rawQuery("SELECT * FROM News WHERE _id = " + id , null);
         cu.moveToFirst();
@@ -178,5 +221,5 @@ public class DBHelper extends SQLiteOpenHelper {
         );
 
         return toReturn;
-    }
+    }*/
 }

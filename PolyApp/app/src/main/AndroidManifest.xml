@@ -38,5 +38,9 @@
             android:name=".event.SingleEvent"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".SingleArticle"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
