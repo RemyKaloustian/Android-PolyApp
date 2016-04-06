@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -48,6 +49,7 @@ public class SingleEvent extends AppCompatActivity {
         }
         Event event = dbHelper.getEvent(idEvent);
 
+        final ScrollView scrollView = (ScrollView) findViewById(R.id.eventScrollView);
         TextView title = (TextView) findViewById(R.id.titleSingleEvent);
         TextView content = (TextView) findViewById(R.id.contentSingleEvent);
         ImageView imageView = (ImageView) findViewById(R.id.imageSingleEvent);
@@ -58,8 +60,21 @@ public class SingleEvent extends AppCompatActivity {
                 "in on your location once it is found, I would check out my answer to this It's doubtful you can change it on click with the default myLocation Marker. However, if you would like" +
                 " the app to automatically zoom in on your location once it is found, I would check out my answer to this ");
 
-        GoogleMap googleMap;
-        googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+        /*GoogleMap googleMap;
+        googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();*/
+
+        googleMap = ((ScrollableMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        ((ScrollableMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                .setListener(new ScrollableMapFragment.OnTouchListener() {
+                    @Override
+                    public void onTouch() {
+                        scrollView.requestDisallowInterceptTouchEvent(true);
+                    }
+                });
+
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(43.615, 7.071944))
                 .title("Hello world"));
