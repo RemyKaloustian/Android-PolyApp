@@ -8,15 +8,19 @@ public class Event {
     private int id;
     private String title;
     private String content;
-    private int location_lat;
-    private int location_long;
+    private float location_lat;
+    private float location_long;
+    private String imagePath;
+    private String date;
 
-    public Event(int id, String title, String content, int location_lat, int location_long) {
+    public Event(int id, String title, String content, float location_lat, float location_long, String imagePath, String date) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.location_lat = location_lat;
         this.location_long = location_long;
+        this.imagePath = imagePath;
+        this.date = date;
     }
 
     public int getId() {
@@ -31,11 +35,15 @@ public class Event {
         return content;
     }
 
-    public int getLocation_lat() {
+    public float getLocation_lat() {
         return location_lat;
     }
 
-    public int getLocation_long() {
+    public float getLocation_long() {
         return location_long;
+    }
+
+    public String getImagePath(){
+        return imagePath;
     }
 }

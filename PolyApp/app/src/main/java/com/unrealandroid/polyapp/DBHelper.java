@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected static String DB_NAME = "SalopeDeBDD.db";
+    protected static String DB_NAME = "SalopeBDD.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;
@@ -115,15 +115,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public Event getEvent(Cursor cursor){
-        cursor.moveToFirst();
-        return new Event(
-                cursor.getInt(cursor.getColumnIndex("_id")),
-                cursor.getString(cursor.getColumnIndex("title")),
-                cursor.getString(cursor.getColumnIndex("content")),
-                cursor.getInt(cursor.getColumnIndex("location-lat")),
-                cursor.getInt(cursor.getColumnIndex("location-long")));
-    }
 
     public ArrayList<Event> getAllEvent(){
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
@@ -133,8 +124,10 @@ public class DBHelper extends SQLiteOpenHelper {
             listArticle.add(new Event(cursor.getInt(cursor.getColumnIndex("_id")),
                     cursor.getString(cursor.getColumnIndex("title")),
                     cursor.getString(cursor.getColumnIndex("content")),
-                    cursor.getInt(cursor.getColumnIndex("location-lat")),
-                    cursor.getInt(cursor.getColumnIndex("location-long"))));
+                    cursor.getFloat(cursor.getColumnIndex("location-lat")),
+                    cursor.getFloat(cursor.getColumnIndex("location-long")),
+                    cursor.getString(cursor.getColumnIndex("imagePath")),
+                    cursor.getString(cursor.getColumnIndex("date"))));
             cursor.moveToNext();
         }
         cursor.close();
@@ -187,8 +180,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 Event event = new Event(cursor.getInt(cursor.getColumnIndex("_id")),
                         cursor.getString(cursor.getColumnIndex("title")),
                         cursor.getString(cursor.getColumnIndex("content")),
-                        cursor.getInt(cursor.getColumnIndex("location-lat")),
-                        cursor.getInt(cursor.getColumnIndex("location-long")));
+                        cursor.getFloat(cursor.getColumnIndex("location-lat")),
+                        cursor.getFloat(cursor.getColumnIndex("location-long")),
+                        cursor.getString(cursor.getColumnIndex("imagePath")),
+                        cursor.getString(cursor.getColumnIndex("date")));
                 cursor.close();
                 return event;
             }

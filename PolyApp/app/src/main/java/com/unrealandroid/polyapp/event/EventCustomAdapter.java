@@ -2,6 +2,7 @@ package com.unrealandroid.polyapp.event;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,11 @@ public class EventCustomAdapter extends ArrayAdapter<Event> {
                 getContext().startActivity(intent);
             }
         });
-        TextView info = (TextView) convertView.findViewById(R.id.eventContentPreview);
 
         AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
-        asyncTaskImage.execute("http://dbseventsinc.com/wp-content/uploads/2015/12/event-services-banner.jpg");
+        asyncTaskImage.execute(event.getImagePath());
         title.setText(event.getTitle());
-        info.setText(event.getContent());
+        title.setTypeface(null, Typeface.BOLD);
 
         return convertView;
     }
