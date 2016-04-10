@@ -142,7 +142,8 @@ public class DBHelper extends SQLiteOpenHelper {
             listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("_id")),
                     cursor.getString(cursor.getColumnIndex("content")),
                     cursor.getString(cursor.getColumnIndex("imagePath")),
-                    cursor.getString(cursor.getColumnIndex("title"))));
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("participants"))));
             cursor.moveToNext();
         }
         cursor.close();

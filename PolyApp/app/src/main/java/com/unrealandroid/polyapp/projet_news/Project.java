@@ -13,21 +13,23 @@ import android.widget.ImageView;
  */
 public class Project implements Parcelable{
 
-    String title, content, imagePath;
-    int id;
+    private String title, content, imagePath, participants;
+    private int id;
 
-    public Project(int id, String content, String imagePath, String title) {
+    public Project(int id, String content, String imagePath, String title, String participants) {
 
         this.content = content;
         this.id = id;
         this.imagePath = imagePath;
         this.title = title;
+        this.participants = participants;
     }
 
     protected Project(Parcel in) {
         title = in.readString();
         content = in.readString();
         imagePath = in.readString();
+        participants = in.readString();
         id = in.readInt();
     }
 
@@ -59,6 +61,8 @@ public class Project implements Parcelable{
         return imagePath;
     }
 
+    public String getParticipants() { return participants; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -72,6 +76,7 @@ public class Project implements Parcelable{
         dest.writeString(title);
         dest.writeString(content);
         dest.writeString(imagePath);
+        dest.writeString(participants);
         dest.writeInt(id);
     }
 }
