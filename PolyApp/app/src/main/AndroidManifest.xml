@@ -42,5 +42,8 @@
             android:name=".SingleArticle"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".projet_news.SingleProject">
+        </activity>
     </application>
 </manifest>

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Charly on 04/04/2016.
  */
-public class ProjectCustomAdapter extends ArrayAdapter<Project> implements View.OnClickListener{
+public class ProjectCustomAdapter extends ArrayAdapter<Project>{
 
     Project project;
 
@@ -42,22 +42,13 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project> implements View.
 
         TextView info = (TextView) convertView.findViewById(R.id.projectContentPreview);
 
+
         AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
         asyncTaskImage.execute(project.getImage());
+
         title.setText(project.getTitle());
         info.setText(project.getContent());
 
         return convertView;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId())
-        {
-            case R.id.imageProject :
-            {
-                //Intent intent = new Intent(getContext(), );
-            }break;
-        }
     }
 }

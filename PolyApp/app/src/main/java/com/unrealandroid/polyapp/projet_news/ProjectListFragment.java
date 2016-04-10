@@ -1,10 +1,12 @@
 package com.unrealandroid.polyapp.projet_news;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.unrealandroid.polyapp.DBHelper;
@@ -16,9 +18,11 @@ import java.sql.SQLException;
 /**
  * Created by Charly on 04/04/2016.
  */
-public class ProjectListFragment extends Fragment {
+public class ProjectListFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    private ProjectCustomAdapter adapter;
 
     public ProjectListFragment() {
     }
@@ -47,16 +51,28 @@ public class ProjectListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ListView listView = (ListView) getView().findViewById(R.id.projectList);
+
         try {
             DBHelper dbHelper = new DBHelper(getActivity());
             dbHelper.createDataBase();
             dbHelper.openDataBase();
-            ProjectCustomAdapter projectCustomAdapter = new ProjectCustomAdapter(getActivity(), 0, dbHelper.getAllProject());
-            ListView listView = (ListView) getView().findViewById(R.id.projectList);
-            listView.setAdapter(projectCustomAdapter);
+            adapter = new ProjectCustomAdapter(getActivity(), 0, dbHelper.getAllProject());
         }
         catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Project project = adapter.getItem(position);
+        Intent intent = new Intent(getContext(), SingleProject.class);
+        intent.putExtra("Project", project);
+        startActivity(intent);
     }
 }
