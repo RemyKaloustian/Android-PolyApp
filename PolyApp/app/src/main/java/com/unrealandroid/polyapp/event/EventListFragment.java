@@ -1,24 +1,39 @@
 package com.unrealandroid.polyapp.event;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
+import com.unrealandroid.polyapp.projet_news.Project;
+import com.unrealandroid.polyapp.projet_news.ProjectCustomAdapter;
+import com.unrealandroid.polyapp.projet_news.SingleProject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
 /**
  * Created by Kevin on 02/04/2016.
  */
-public class EventListFragment extends Fragment {
+public class EventListFragment extends Fragment implements AdapterView.OnItemClickListener{
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private EventCustomAdapter eventCustomAdapter;
 
     public EventListFragment() {
     }
@@ -39,10 +54,6 @@ public class EventListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_list, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
-
         return rootView;
     }
 
@@ -54,13 +65,34 @@ public class EventListFragment extends Fragment {
             DBHelper dbHelper = new DBHelper(getActivity());
             dbHelper.createDataBase();
             dbHelper.openDataBase();
-            EventCustomAdapter eventCustomAdapter = new EventCustomAdapter(getActivity(), 0, dbHelper.getAllEvent());
+            eventCustomAdapter = new EventCustomAdapter(getActivity(), 0, dbHelper.getAllEvent());
             GridView gridView = (GridView) getView().findViewById(R.id.gridevent);
             gridView.setAdapter(eventCustomAdapter);
+            gridView.setOnItemClickListener(this);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Event event = eventCustomAdapter.getItem(position);
+        Intent intent = new Intent(getContext(), SingleEvent.class);
+        intent.putExtra("Event", event);
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        event.getImage().compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        FileOutputStream fo = null;
+        try {
+            fo = getContext().openFileOutput(event.getTitle(), Context.MODE_PRIVATE);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        startActivity(intent);
     }
 }

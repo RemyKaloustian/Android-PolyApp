@@ -36,17 +36,18 @@ public class EventCustomAdapter extends ArrayAdapter<Event> {
         TextView title = (TextView) convertView.findViewById(R.id.eventTitle);
         ImageView image = (ImageView) convertView.findViewById(R.id.imageEvent);
 
-        image.setOnClickListener(new View.OnClickListener() {
+        /*image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SingleEvent.class);
                 intent.putExtra("IdEvent", event.getId());
                 getContext().startActivity(intent);
             }
-        });
+        });*/
 
-        AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
-        asyncTaskImage.execute(event.getImagePath());
+        //AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
+        //asyncTaskImage.execute(event.getImagePath());
+        image.setImageBitmap(event.getImage());
         title.setText(event.getTitle());
         title.setTypeface(null, Typeface.BOLD);
 

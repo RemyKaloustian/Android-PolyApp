@@ -1,10 +1,14 @@
 package com.unrealandroid.polyapp.event;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +25,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
+import com.unrealandroid.polyapp.projet_news.Project;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -38,7 +45,7 @@ public class SingleEvent extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        int idEvent = intent.getIntExtra("IdEvent", 1);
+        Event event = intent.getParcelableExtra("Event");
         setContentView(R.layout.single_event);
 
         int mUIFlag =
@@ -52,6 +59,15 @@ public class SingleEvent extends AppCompatActivity {
 
         getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
 
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeStream(this.openFileInput(event.getTitle()));
+            File f = new File(event.getTitle());
+            f.delete();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         DBHelper dbHelper = null;
         try {
             dbHelper = new DBHelper(this);
@@ -62,15 +78,16 @@ public class SingleEvent extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Event event = dbHelper.getEvent(idEvent);
+
 
         final ScrollView scrollView = (ScrollView) findViewById(R.id.eventScrollView);
         TextView title = (TextView) findViewById(R.id.titleSingleEvent);
         TextView content = (TextView) findViewById(R.id.contentSingleEvent);
         ImageView imageView = (ImageView) findViewById(R.id.imageSingleEvent);
-
-        AsyncTaskImage asyncTaskImage = new AsyncTaskImage(imageView);
-        asyncTaskImage.execute(event.getImagePath());
+        if(bitmap != null)
+            imageView.setImageBitmap(bitmap);
+        //AsyncTaskImage asyncTaskImage = new AsyncTaskImage(imageView);
+        //asyncTaskImage.execute(event.getImagePath());
         title.setText(event.getTitle());
         title.setTypeface(null, Typeface.BOLD);
         content.setText(event.getContent());
