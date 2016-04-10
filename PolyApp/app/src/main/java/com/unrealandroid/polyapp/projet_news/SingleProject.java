@@ -35,7 +35,7 @@ public class SingleProject extends AppCompatActivity {
         Intent intent = getIntent();
         Project project = intent.getParcelableExtra("Project");
 
-        setTitle(project.getTitle());
+        setTitle(project.getTitle()); // Sets the title of the activity (label in manifest.xml)
 
         TextView content = (TextView) findViewById(R.id.test);
         content.setText(project.getContent());

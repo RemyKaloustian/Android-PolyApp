@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ProjectCustomAdapter extends ArrayAdapter<Project>{
 
-    Project project;
+    private Project project;
 
     public ProjectCustomAdapter(Context context, int resource, List<Project> list) {
         super(context, resource, list);
