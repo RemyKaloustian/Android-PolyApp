@@ -1,10 +1,13 @@
 package com.unrealandroid.polyapp.projet_news;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.R;
 
 /**
@@ -24,6 +27,11 @@ public class SingleProject extends AppCompatActivity {
 
         TextView text = (TextView) findViewById(R.id.test);
         text.setText(project.getContent());
+
+
+        ImageView image = (ImageView) findViewById(R.id.singleImage);
+        AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
+        asyncTaskImage.execute(project.getImage());
 
     }
 }
