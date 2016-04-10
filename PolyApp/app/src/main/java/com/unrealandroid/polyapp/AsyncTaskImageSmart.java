@@ -14,14 +14,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by Kevin on 02/04/2016.
+ * Created by Charly on 10/04/2016.
  */
-public class AsyncTaskImage extends AsyncTask<String, Void, Bitmap> {
+public class AsyncTaskImageSmart extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView imageView;
+    private ProjectCustomAdapter adpater;
+    private int position;
 
-    public AsyncTaskImage (ImageView imageView){
+    public AsyncTaskImageSmart(ImageView imageView, ProjectCustomAdapter adapter, int position) {
         this.imageView = imageView;
+        this.adpater = adapter;
+        this.position = position;
     }
 
     @Override
@@ -46,6 +50,7 @@ public class AsyncTaskImage extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         if(imageView != null){
             imageView.setImageBitmap(bitmap);
+            adpater.setMap(position, bitmap);
         }
     }
 }
