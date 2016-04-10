@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.unrealandroid.polyapp.AsyncTaskImage;
+import com.unrealandroid.polyapp.AsyncTaskImageSmart;
 import com.unrealandroid.polyapp.R;
 
 /**
@@ -20,17 +21,6 @@ public class SingleProject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_project);
-
-        int mUIFlag =
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
 
         Intent intent = getIntent();
         Project project = intent.getParcelableExtra("Project");
@@ -44,8 +34,18 @@ public class SingleProject extends AppCompatActivity {
         participants.setText("Participants : " + project.getParticipants());
 
         ImageView image = (ImageView) findViewById(R.id.singleImage);
-        AsyncTaskImage asyncTaskImage = new AsyncTaskImage(image);
-        asyncTaskImage.execute(project.getImage());
+
+        if(project.getBitmap() == null)
+        {
+            AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, project);
+            asyncTaskImage.execute(project.getImage());
+        }
+        else
+        {
+            image.setImageBitmap(project.getBitmap());
+        }
+
+
 
     }
 }

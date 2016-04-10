@@ -1,5 +1,6 @@
 package com.unrealandroid.polyapp.projet_news;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ public class Project implements Parcelable{
 
     private String title, content, imagePath, participants;
     private int id;
+    private Bitmap bitmap;
 
     public Project(int id, String content, String imagePath, String title, String participants) {
 
@@ -31,6 +33,7 @@ public class Project implements Parcelable{
         imagePath = in.readString();
         participants = in.readString();
         id = in.readInt();
+        //bitmap = in.readParcelable(bitmap.getClass().getClassLoader());
     }
 
     public static final Creator<Project> CREATOR = new Creator<Project>() {
@@ -63,6 +66,14 @@ public class Project implements Parcelable{
 
     public String getParticipants() { return participants; }
 
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -78,5 +89,6 @@ public class Project implements Parcelable{
         dest.writeString(imagePath);
         dest.writeString(participants);
         dest.writeInt(id);
+        //dest.writeValue(bitmap);
     }
 }

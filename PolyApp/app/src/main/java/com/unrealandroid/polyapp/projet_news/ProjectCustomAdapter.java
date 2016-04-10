@@ -25,11 +25,9 @@ import java.util.Map;
 public class ProjectCustomAdapter extends ArrayAdapter<Project>{
 
     private Project project;
-    private Map<Integer, Bitmap> map;
 
     public ProjectCustomAdapter(Context context, int resource, List<Project> list) {
         super(context, resource, list);
-        map = new HashMap<>();
     }
 
     @Override
@@ -48,27 +46,19 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project>{
 
         TextView info = (TextView) convertView.findViewById(R.id.projectContentPreview);
 
-        if(!map.containsKey(position))
+        if(project.getBitmap() == null)
         {
-            AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, this, position);
+            AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, project);
             asyncTaskImage.execute(project.getImage());
         }
         else
         {
-            image.setImageBitmap(map.get(position));
+            image.setImageBitmap(project.getBitmap());
         }
 
         title.setText(project.getTitle());
         info.setText(project.getContent());
 
         return convertView;
-    }
-
-    public void setMap(int position, Bitmap image)
-    {
-        if(!map.containsKey(position))
-        {
-            map.put(position, image);
-        }
     }
 }

@@ -73,6 +73,6 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
         Project project = adapter.getItem(position);
         Intent intent = new Intent(getContext(), SingleProject.class);
         intent.putExtra("Project", project);
-        startActivity(intent);
+        startActivity(intent); // We can't pass an image through an intent !! Too big !
     }
 }

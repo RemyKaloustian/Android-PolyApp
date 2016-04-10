@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.unrealandroid.polyapp.projet_news.Project;
 import com.unrealandroid.polyapp.projet_news.ProjectCustomAdapter;
 
 import java.io.IOException;
@@ -19,13 +20,10 @@ import java.net.URL;
 public class AsyncTaskImageSmart extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView imageView;
-    private ProjectCustomAdapter adpater;
-    private int position;
-
-    public AsyncTaskImageSmart(ImageView imageView, ProjectCustomAdapter adapter, int position) {
+    private Project project;
+    public AsyncTaskImageSmart(ImageView imageView, Project project) {
         this.imageView = imageView;
-        this.adpater = adapter;
-        this.position = position;
+        this.project = project;
     }
 
     @Override
@@ -50,7 +48,7 @@ public class AsyncTaskImageSmart extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         if(imageView != null){
             imageView.setImageBitmap(bitmap);
-            adpater.setMap(position, bitmap);
+            project.setBitmap(bitmap);
         }
     }
 }
