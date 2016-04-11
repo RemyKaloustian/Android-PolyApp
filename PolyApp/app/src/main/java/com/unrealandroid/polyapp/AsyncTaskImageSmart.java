@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
+import com.unrealandroid.polyapp.event.Event;
 import com.unrealandroid.polyapp.projet_news.Project;
 import com.unrealandroid.polyapp.projet_news.ProjectCustomAdapter;
 
@@ -21,9 +22,16 @@ public class AsyncTaskImageSmart extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView imageView;
     private Project project;
+    private Event event;
+
     public AsyncTaskImageSmart(ImageView imageView, Project project) {
         this.imageView = imageView;
         this.project = project;
+    }
+
+    public AsyncTaskImageSmart(ImageView imageView, Event event){
+        this.imageView = imageView;
+        this.event = event;
     }
 
     @Override
@@ -48,7 +56,10 @@ public class AsyncTaskImageSmart extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         if(imageView != null){
             imageView.setImageBitmap(bitmap);
-            project.setBitmap(bitmap);
+            if(project != null)
+                project.setBitmap(bitmap);
+            else
+                event.setBitmap(bitmap);
         }
     }
 }

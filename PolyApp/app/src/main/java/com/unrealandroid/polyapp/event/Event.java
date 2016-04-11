@@ -25,7 +25,7 @@ public class Event implements Parcelable{
     private float location_long;
     private String imagePath;
     private String date;
-    private Bitmap image;
+    private Bitmap bitmap;
 
     public Event(int id, String title, String content, float location_lat, float location_long, final String imagePath, String date) {
         this.id = id;
@@ -35,22 +35,6 @@ public class Event implements Parcelable{
         this.location_long = location_long;
         this.imagePath = imagePath;
         this.date = date;
-
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    URL urlImage = new URL(imagePath);
-                    HttpURLConnection con = (HttpURLConnection) urlImage.openConnection();
-                    InputStream is = con.getInputStream();
-                    image = BitmapFactory.decodeStream(is);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
     }
 
     protected Event(Parcel in) {
@@ -61,7 +45,6 @@ public class Event implements Parcelable{
         location_long = in.readFloat();
         imagePath = in.readString();
         date = in.readString();
-        image = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     public static final Creator<Event> CREATOR = new Creator<Event>() {
@@ -96,12 +79,17 @@ public class Event implements Parcelable{
         return location_long;
     }
 
-    public Bitmap getImage(){
-        return image;
-    }
 
     public String getImagePath(){
         return imagePath;
+    }
+
+    public void setBitmap(Bitmap bitmap){
+        this.bitmap = bitmap;
+    }
+
+    public Bitmap getBitmap(){
+        return this.bitmap;
     }
 
     @Override
@@ -118,6 +106,5 @@ public class Event implements Parcelable{
         dest.writeFloat(location_long);
         dest.writeString(imagePath);
         dest.writeString(date);
-        //image.writeToParcel(dest, 0);
     }
 }

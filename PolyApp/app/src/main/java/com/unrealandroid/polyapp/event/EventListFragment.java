@@ -79,20 +79,21 @@ public class EventListFragment extends Fragment implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Event event = eventCustomAdapter.getItem(position);
-        Intent intent = new Intent(getContext(), SingleEvent.class);
-        intent.putExtra("Event", event);
+        if(event.getBitmap() != null    ) {
+            Intent intent = new Intent(getContext(), SingleEvent.class);
+            intent.putExtra("Event", event);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            event.getBitmap().compress(Bitmap.CompressFormat.PNG, 100, bytes);
+            FileOutputStream fo = null;
+            try {
+                fo = getContext().openFileOutput(event.getTitle(), Context.MODE_PRIVATE);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        event.getImage().compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        FileOutputStream fo = null;
-        try {
-            fo = getContext().openFileOutput(event.getTitle(), Context.MODE_PRIVATE);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            startActivity(intent);
         }
-
-        startActivity(intent);
     }
 }
