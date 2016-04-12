@@ -55,21 +55,5 @@ public class SingleProject extends AppCompatActivity {
             AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, project);
             asyncTaskImage.execute(project.getImage());
         }
-        /*if(file.exists())
-        {
-            participants.setText("test");
-            try{
-                Bitmap bitmap = BitmapFactory.decodeStream(this.openFileInput(file.getName()));
-                image.setImageBitmap(bitmap);
-                file.delete();
-            }
-            catch(FileNotFoundException e){
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-
-        }*/
     }
 }
