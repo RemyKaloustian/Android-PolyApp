@@ -1,6 +1,8 @@
 package com.unrealandroid.polyapp.projet_news;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,11 @@ import android.widget.TextView;
 import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.AsyncTaskImageSmart;
 import com.unrealandroid.polyapp.R;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * Created by Charly on 06/04/2016.
@@ -35,17 +42,34 @@ public class SingleProject extends AppCompatActivity {
 
         ImageView image = (ImageView) findViewById(R.id.singleImage);
 
-        if(project.getBitmap() == null)
+        try{
+            FileInputStream f = this.openFileInput(project.getTitle());
+            Bitmap bitmap = BitmapFactory.decodeStream(f);
+            image.setImageBitmap(bitmap);
+            File file = new File(project.getTitle());
+
+            file.delete(); // It seems that the file doesn't exist... Have to resolve this because it doesn't delete.
+        }
+        catch(FileNotFoundException e)
         {
             AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, project);
             asyncTaskImage.execute(project.getImage());
         }
+        /*if(file.exists())
+        {
+            participants.setText("test");
+            try{
+                Bitmap bitmap = BitmapFactory.decodeStream(this.openFileInput(file.getName()));
+                image.setImageBitmap(bitmap);
+                file.delete();
+            }
+            catch(FileNotFoundException e){
+                e.printStackTrace();
+            }
+        }
         else
         {
-            image.setImageBitmap(project.getBitmap());
-        }
 
-
-
+        }*/
     }
 }

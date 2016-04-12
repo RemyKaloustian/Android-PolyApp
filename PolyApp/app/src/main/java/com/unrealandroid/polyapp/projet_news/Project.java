@@ -33,7 +33,6 @@ public class Project implements Parcelable{
         imagePath = in.readString();
         participants = in.readString();
         id = in.readInt();
-        //bitmap = in.readParcelable(bitmap.getClass().getClassLoader());
     }
 
     public static final Creator<Project> CREATOR = new Creator<Project>() {
@@ -89,6 +88,5 @@ public class Project implements Parcelable{
         dest.writeString(imagePath);
         dest.writeString(participants);
         dest.writeInt(id);
-        //dest.writeValue(bitmap);
     }
 }

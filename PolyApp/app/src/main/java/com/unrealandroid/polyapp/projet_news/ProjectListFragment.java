@@ -1,6 +1,8 @@
 package com.unrealandroid.polyapp.projet_news;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.ListView;
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -73,6 +77,23 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
         Project project = adapter.getItem(position);
         Intent intent = new Intent(getContext(), SingleProject.class);
         intent.putExtra("Project", project);
-        startActivity(intent); // We can't pass an image through an intent !! Too big !
+
+        if(project.getBitmap() != null) // We can't pass an image through an intent !! Too big !
+        {
+            Bitmap temp = project.getBitmap();
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            temp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+
+            FileOutputStream fOutStream = null;
+            try {
+                fOutStream = getContext().openFileOutput(project.getTitle(), Context.MODE_PRIVATE);
+                fOutStream.write(bytes.toByteArray());
+                fOutStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        startActivity(intent);
     }
 }
