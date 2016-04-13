@@ -20,7 +20,6 @@ import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
 import com.unrealandroid.polyapp.projet_news.Project;
 import com.unrealandroid.polyapp.projet_news.ProjectCustomAdapter;
-import com.unrealandroid.polyapp.projet_news.SingleProject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
