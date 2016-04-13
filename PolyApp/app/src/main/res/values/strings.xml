@@ -3,11 +3,11 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="google_api_key">AIzaSyD-c7pI8snw6pJrcjtxF_Kf9VH4gEQYn80</string>
-    <string name="welcome_to_polytech">WELCOME TO POLYTECH</string>
     <string name="polytech">Polytech</string>
-    <string name="polytech_description">
-        Polytech Nice-Sophia est l ecole d ingenieur de l Universite Nice - Sophia Antipolis.
-        Elle fait partie du regroupement des ecoles du reseau national Polytech d ecole d ingenieur polytechnique
+    <string name="menu_title">BIENVENUE A</string>
+    <string name="menu_description">
+        Polytech Nice-Sophia est l\'école d\'ingenieur de l\'Universite Nice - Sophia Antipolis.
+        Elle fait partie du regroupement des écoles du réseau national Polytech d\'école d\'ingénieur polytechnique
         (Ecole Polytechnique Universitaire).
     </string>
 </resources>
