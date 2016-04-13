@@ -1,6 +1,5 @@
 package com.unrealandroid.polyapp;
 
-import android.graphics.Typeface;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.unrealandroid.polyapp.event.EventListFragment;
+import com.unrealandroid.polyapp.menu.MenuFragment;
 import com.unrealandroid.polyapp.projet_news.ProjectListFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,17 +43,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int mUIFlag =
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,25 +64,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    /**
-     * Used to set again in fullScreen mode when going on a detail event/project and then use "back"
-     */
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-
-        int mUIFlag =
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-
-        getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
     }
 
     @Override
@@ -147,10 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 DBHelper dbHelper = new DBHelper(getActivity());
                 dbHelper.createDataBase();
                 dbHelper.openDataBase();
-                //textView.setText(dbHelper.testNews() + " " + dbHelper.testProject() + " " + dbHelper.testEvent());
-                textView.setText("Remy & Anthonny not found. Please press F2 for help.");
-                textView.setTypeface(null, Typeface.BOLD);
-                textView.setTextSize(30);
+                textView.setText(dbHelper.testNews() + " " + dbHelper.testProject() + " " + dbHelper.testEvent());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -173,9 +140,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if(position == 3)
+            if (position == 0)
+                return MenuFragment.newInstance(position + 1);
+            if (position == 3)
                 return EventListFragment.newInstance(position + 1);
-            else if(position == 2)
+            else if (position == 2)
                 return ProjectListFragment.newInstance(position + 1);
             return PlaceholderFragment.newInstance(position + 1);
         }
