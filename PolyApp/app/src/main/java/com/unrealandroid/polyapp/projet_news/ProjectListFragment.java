@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.unrealandroid.polyapp.AsyncTaskImageSmart;
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
 
@@ -19,6 +22,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Charly on 04/04/2016.
@@ -28,6 +33,8 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private ProjectCustomAdapter adapter;
+    private List<Project> projects;
+    private Project firstProject;
 
     public ProjectListFragment() {
     }
@@ -62,11 +69,36 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
             DBHelper dbHelper = new DBHelper(getActivity());
             dbHelper.createDataBase();
             dbHelper.openDataBase();
-            adapter = new ProjectCustomAdapter(getActivity(), 0, dbHelper.getAllProject());
+
+            projects = dbHelper.getAllProject();
+            firstProject = projects.remove(0);
+
+            adapter = new ProjectCustomAdapter(getActivity(), 0, projects);
         }
         catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+
+        /**** First Project to put in evidence ****/
+
+        ImageView image = (ImageView) getActivity().findViewById(R.id.firstImageProject);
+        if(firstProject.getBitmap() == null)
+        {
+            AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, firstProject);
+            asyncTaskImage.execute(firstProject.getImage());
+        }
+        else
+        {
+            image.setImageBitmap(firstProject.getBitmap());
+        }
+
+        TextView title = (TextView) getView().findViewById(R.id.firstProjectTitle);
+        title.setText(firstProject.getTitle());
+
+        TextView content = (TextView) getView().findViewById(R.id.firstProjectContentPreview);
+        content.setText(firstProject.getContent());
+
+        /**** Other projects ****/
 
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(this);
