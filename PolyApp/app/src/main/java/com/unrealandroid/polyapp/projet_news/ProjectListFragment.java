@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.unrealandroid.polyapp.DBHelper;
@@ -55,7 +56,7 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ListView listView = (ListView) getView().findViewById(R.id.projectList);
+        GridView gridView = (GridView) getView().findViewById(R.id.projectGrid);
 
         try {
             DBHelper dbHelper = new DBHelper(getActivity());
@@ -67,8 +68,8 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
             e.printStackTrace();
         }
 
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+        gridView.setAdapter(adapter);
+        gridView.setOnItemClickListener(this);
     }
 
     @Override

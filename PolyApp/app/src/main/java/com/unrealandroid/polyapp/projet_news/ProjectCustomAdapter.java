@@ -3,6 +3,8 @@ package com.unrealandroid.polyapp.projet_news;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +59,7 @@ public class ProjectCustomAdapter extends ArrayAdapter<Project>{
         }
 
         title.setText(project.getTitle());
+
         info.setText(project.getContent());
 
         return convertView;
