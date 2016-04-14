@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * Created by Charly on 04/04/2016.
  */
-public class ProjectListFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class ProjectListFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener{
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -101,7 +102,13 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
         /**** Other projects ****/
 
         gridView.setAdapter(adapter);
+
+
+        CardView firstCard = (CardView) getView().findViewById(R.id.firstCard);
+
+        firstCard.setOnClickListener(this);
         gridView.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -128,5 +135,35 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
         }
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.firstCard :
+            {
+                Intent intent = new Intent(getContext(), SingleProject.class);
+                intent.putExtra("Project", firstProject);
+
+                if(firstProject.getBitmap() != null) // We can't pass an image through an intent !! Too big !
+                {
+                    Bitmap temp = firstProject.getBitmap();
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    temp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+
+                    FileOutputStream fOutStream = null;
+                    try {
+                        fOutStream = getContext().openFileOutput(firstProject.getTitle(), Context.MODE_PRIVATE);
+                        fOutStream.write(bytes.toByteArray());
+                        fOutStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                startActivity(intent);
+            }break;
+        }
     }
 }
