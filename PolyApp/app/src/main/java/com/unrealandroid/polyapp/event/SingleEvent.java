@@ -48,16 +48,11 @@ public class SingleEvent extends AppCompatActivity {
         Event event = intent.getParcelableExtra("Event");
         setContentView(R.layout.single_event);
 
-        int mUIFlag =
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
-        getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
         Bitmap bitmap = null;
         try {
@@ -84,6 +79,11 @@ public class SingleEvent extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.titleSingleEvent);
         TextView content = (TextView) findViewById(R.id.contentSingleEvent);
         ImageView imageView = (ImageView) findViewById(R.id.imageSingleEvent);
+
+        setTitle(event.getTitle());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         if(bitmap != null)
             imageView.setImageBitmap(bitmap);
         //AsyncTaskImage asyncTaskImage = new AsyncTaskImage(imageView);
@@ -109,5 +109,15 @@ public class SingleEvent extends AppCompatActivity {
                 .position(new LatLng(event.getLocation_lat(), event.getLocation_long()))
                 .title(event.getTitle()));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(event.getLocation_lat(), event.getLocation_long()), 15.0f));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
