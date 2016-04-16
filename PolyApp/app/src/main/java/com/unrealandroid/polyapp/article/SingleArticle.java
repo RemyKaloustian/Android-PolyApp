@@ -1,20 +1,21 @@
-package com.unrealandroid.polyapp;
+package com.unrealandroid.polyapp.article;
 
 /**
  * Created by Rémy Kaloustian on 02/04/2016.
  */
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.unrealandroid.polyapp.AsyncTaskImage;
+import com.unrealandroid.polyapp.DBHelper;
+import com.unrealandroid.polyapp.R;
 
 import java.io.IOException;
 import java.sql.SQLException;

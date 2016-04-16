@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Kevin on 02/04/2016.
  */
-public class EventCustomAdapter extends ArrayAdapter<Event> {
+public class  EventCustomAdapter extends ArrayAdapter<Event> {
     public EventCustomAdapter(Context context, int resource, List<Event> list) {
         super(context, resource, list);
     }

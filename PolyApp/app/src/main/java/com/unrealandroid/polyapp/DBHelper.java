@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.unrealandroid.polyapp.article.Article;
 import com.unrealandroid.polyapp.event.Event;
 import com.unrealandroid.polyapp.projet_news.Project;
 

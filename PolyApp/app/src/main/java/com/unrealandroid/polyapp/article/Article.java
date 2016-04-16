@@ -1,4 +1,4 @@
-package com.unrealandroid.polyapp;
+package com.unrealandroid.polyapp.article;
 
 /**
  * Created by Rémy Kaloustian on 02/04/2016.
