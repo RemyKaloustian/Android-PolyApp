@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unrealandroid.polyapp.article.Article;
 import com.unrealandroid.polyapp.event.Event;
 
 import java.io.IOException;

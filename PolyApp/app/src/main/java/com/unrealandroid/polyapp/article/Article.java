@@ -5,11 +5,11 @@ package com.unrealandroid.polyapp.article;
  */
 public class Article {
 
-    String _pathToImage;
-    String _title;
-    String _content;
-    String _date;
-    int _id;
+    public String _pathToImage;
+    public String _title;
+    public String _content;
+    public String _date;
+    public int _id;
 
     public Article(int id, String pathToImage, String title, String content, String date) {
         _id = id;
