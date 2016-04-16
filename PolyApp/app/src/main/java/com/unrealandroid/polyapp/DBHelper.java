@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected static String DB_NAME = "putainDeBDD.db";
+    protected static String DB_NAME = "BDD.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;
@@ -116,15 +116,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public Event getEvent(Cursor cursor){
-        cursor.moveToFirst();
-        return new Event(
-                cursor.getInt(cursor.getColumnIndex("_id")),
-                cursor.getString(cursor.getColumnIndex("title")),
-                cursor.getString(cursor.getColumnIndex("content")),
-                cursor.getInt(cursor.getColumnIndex("location-lat")),
-                cursor.getInt(cursor.getColumnIndex("location-long")));
-    }
 
     public ArrayList<Event> getAllEvent(){
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
@@ -134,8 +125,10 @@ public class DBHelper extends SQLiteOpenHelper {
             listArticle.add(new Event(cursor.getInt(cursor.getColumnIndex("_id")),
                     cursor.getString(cursor.getColumnIndex("title")),
                     cursor.getString(cursor.getColumnIndex("content")),
-                    cursor.getInt(cursor.getColumnIndex("location-lat")),
-                    cursor.getInt(cursor.getColumnIndex("location-long"))));
+                    cursor.getFloat(cursor.getColumnIndex("location-lat")),
+                    cursor.getFloat(cursor.getColumnIndex("location-long")),
+                    cursor.getString(cursor.getColumnIndex("imagePath")),
+                    cursor.getString(cursor.getColumnIndex("date"))));
             cursor.moveToNext();
         }
         cursor.close();
@@ -150,12 +143,59 @@ public class DBHelper extends SQLiteOpenHelper {
             listProject.add(new Project(cursor.getInt(cursor.getColumnIndex("_id")),
                     cursor.getString(cursor.getColumnIndex("content")),
                     cursor.getString(cursor.getColumnIndex("imagePath")),
-                    cursor.getString(cursor.getColumnIndex("title"))));
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("participants"))));
             cursor.moveToNext();
         }
         cursor.close();
+        this.close();
         return listProject;
     }
+
+    public Article getArticle(int id){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM News", null);
+        ArrayList<Article> listArticle = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            listArticle.add(new Article(cursor.getInt(cursor.getColumnIndex("_id")),
+                    cursor.getString(cursor.getColumnIndex("imagePath")),
+                    cursor.getString(cursor.getColumnIndex("title")),
+                    cursor.getString(cursor.getColumnIndex("content")),
+                    "date"));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        System.out.println("Size = " + listArticle.size());
+        for (int i = 0; i < listArticle.size(); ++i){
+            if(listArticle.get(i)._id == id)
+                return listArticle.get(i);
+        }
+        return null;
+    }
+
+    public Event getEvent(int id){
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM Event", null);
+        //ArrayList<Event> listEvent = new ArrayList<>();
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            if(cursor.getInt(cursor.getColumnIndex("_id")) == id){
+                Event event = new Event(cursor.getInt(cursor.getColumnIndex("_id")),
+                        cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("content")),
+                        cursor.getFloat(cursor.getColumnIndex("location-lat")),
+                        cursor.getFloat(cursor.getColumnIndex("location-long")),
+                        cursor.getString(cursor.getColumnIndex("imagePath")),
+                        cursor.getString(cursor.getColumnIndex("date")));
+                cursor.close();
+                return event;
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return null;
+    }
+
 
     public Cursor getEventCursor(){
         Cursor cursor =  myDataBase.rawQuery("SELECT * FROM Event", null);
@@ -163,7 +203,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public Article getArticle(String id) {
+    /*public Article getArticle(int id) {
 
         Cursor cu = myDataBase.rawQuery("SELECT * FROM News WHERE _id = " + id , null);
         cu.moveToFirst();
@@ -179,5 +219,5 @@ public class DBHelper extends SQLiteOpenHelper {
         );
 
         return toReturn;
-    }
+    }*/
 }
