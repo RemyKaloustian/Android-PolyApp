@@ -3,12 +3,16 @@ package com.unrealandroid.polyapp.projet_news;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.AsyncTaskImageSmart;
@@ -34,11 +38,23 @@ public class SingleProject extends AppCompatActivity {
 
         setTitle(project.getTitle()); // Sets the title of the activity (label in manifest.xml)
 
-        TextView content = (TextView) findViewById(R.id.test);
+        TextView content = (TextView) findViewById(R.id.singleContent);
         content.setText(project.getContent());
 
         TextView participants = (TextView) findViewById(R.id.participants);
         participants.setText("Participants : " + project.getParticipants());
+
+        /**** Sets special colors for the first project ****/
+
+        if(project.getId() == 1)
+        {
+            findViewById(R.id.single_project_layout).setBackgroundColor(Color.parseColor("#34495e"));
+            content.setTextColor(Color.parseColor("#ecf0f1"));
+            participants.setTextColor(Color.parseColor("#ecf0f1"));
+            participants.setTypeface(null, Typeface.BOLD);
+        }
+
+        /**** Image settings ****/
 
         ImageView image = (ImageView) findViewById(R.id.singleImage);
 
