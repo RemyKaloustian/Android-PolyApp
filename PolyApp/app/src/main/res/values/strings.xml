@@ -10,4 +10,13 @@
         Elle fait partie du regroupement des écoles du réseau national Polytech d\'école d\'ingénieur polytechnique
         (Ecole Polytechnique Universitaire).
     </string>
+    <string name="why_polytech">
+        Pourquoi choisir Polytech ?
+    </string>
+    <string name="why_IT">
+        Pourquoi choisir la spécialité Informatique ?
+    </string>
+    <string name="why_android">
+        Pourquoi faire de l\'Android ?
+    </string>
 </resources>
