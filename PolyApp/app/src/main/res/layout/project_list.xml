@@ -43,7 +43,7 @@
                 android:id="@+id/firstProjectContentPreview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:textColor="#ecf0f1" />
@@ -58,7 +58,8 @@
         android:layout_height="wrap_content"
         android:numColumns="2"
         android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp">
+        android:verticalSpacing="10dp"
+        android:paddingBottom="30dp">
     </GridView>
 
 </LinearLayout>
