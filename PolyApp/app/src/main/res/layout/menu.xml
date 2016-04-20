@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content">
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -16,9 +13,8 @@
         android:paddingTop="10dp"
         android:text="@string/menu_title"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textColor="?attr/colorPrimary"
+        android:textSize="30sp" />
 
     <ImageView
         android:id="@+id/menuLogo"
@@ -33,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoText="false"
+        android:background="#FFFFFF"
         android:paddingBottom="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -135,20 +132,8 @@
                 android:contentDescription="@string/polytech"
                 android:src="@drawable/campus_13" />
 
-
-
         </LinearLayout>
 
-
-
-
     </ViewFlipper>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/why_polytech"/>
-
 
 </LinearLayout>
-
-</ScrollView>
