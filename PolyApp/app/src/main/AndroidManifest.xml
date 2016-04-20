@@ -45,7 +45,8 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".projet_news.SingleProject">
+            android:name=".projet_news.SingleProject"
+            android:theme="@style/AppTheme.CoordinatorTheme">
         </activity>
     </application>
 </manifest>

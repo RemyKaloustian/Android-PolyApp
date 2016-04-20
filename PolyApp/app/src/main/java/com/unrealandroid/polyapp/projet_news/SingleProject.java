@@ -3,25 +3,17 @@ package com.unrealandroid.polyapp.projet_news;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
-import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.AsyncTaskImageSmart;
 import com.unrealandroid.polyapp.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 /**
  * Created by Charly on 06/04/2016.
@@ -36,27 +28,18 @@ public class SingleProject extends AppCompatActivity {
         Intent intent = getIntent();
         Project project = intent.getParcelableExtra("Project");
 
-        setTitle(project.getTitle()); // Sets the title of the activity (label in manifest.xml)
+        TextView title = (TextView) findViewById(R.id.project_title);
+        title.setText(project.getTitle());
 
-        TextView content = (TextView) findViewById(R.id.singleContent);
+        TextView content = (TextView) findViewById(R.id.project_content);
         content.setText(project.getContent());
 
-        TextView participants = (TextView) findViewById(R.id.participants);
+        TextView participants = (TextView) findViewById(R.id.project_participants);
         participants.setText("Participants : " + project.getParticipants());
-
-        /**** Sets special colors for the first project ****/
-
-        if(project.getId() == 1)
-        {
-            findViewById(R.id.single_project_layout).setBackgroundColor(Color.parseColor("#34495e"));
-            content.setTextColor(Color.parseColor("#ecf0f1"));
-            participants.setTextColor(Color.parseColor("#ecf0f1"));
-            participants.setTypeface(null, Typeface.BOLD);
-        }
 
         /**** Image settings ****/
 
-        ImageView image = (ImageView) findViewById(R.id.singleImage);
+        ImageView image = (ImageView) findViewById(R.id.project_image);
 
         try{
             FileInputStream f = this.openFileInput(project.getTitle());
