@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.unrealandroid.polyapp.article.ArticleListFragment;
 import com.unrealandroid.polyapp.event.EventListFragment;
 import com.unrealandroid.polyapp.menu.MenuFragment;
 import com.unrealandroid.polyapp.projet_news.ProjectListFragment;
@@ -169,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == 0)
                 return MenuFragment.newInstance(position + 1);
+            if(position == 1)
+                return ArticleListFragment.newInstance(position +1);
             if (position == 2)
                 return ProjectListFragment.newInstance(position + 1);
             if (position == 3)
@@ -189,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return "ACCUEIL";
                 case 1:
-                    return "NEWS";
+                    return "POURQUOI?";
                 case 2:
                     return "PROJETS";
                 case 3:
