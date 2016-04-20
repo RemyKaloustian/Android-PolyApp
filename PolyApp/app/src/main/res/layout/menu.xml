@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
         android:autoStart="true"
         android:background="#FFFFFF"
-        android:flipInterval="5000">
+        android:flipInterval="3000">
 
         <ImageView
             android:id="@+id/imageView1"
