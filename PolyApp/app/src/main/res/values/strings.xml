@@ -13,10 +13,45 @@
     <string name="why_polytech">
         Pourquoi choisir Polytech ?
     </string>
+    <string name="content_why_polytech">
+    Polytech Nice-Sophia affiche clairement sa volonté d’ouverture sur le monde industriel.
+        Dans un environnement favorable, notre école forme des ingénieurs ayant une base scientifique et technique solide,
+        possédant une bonne culture d’entreprise, capables de communiquer et initiés aux fonctions d’encadrement.
+        Nous offrons une formation en adéquation avec les besoins de l’entreprise. 95% de nos diplômés trouvent un emploi dans les 3 mois qui suivent la sortie de notre école.
+
+    </string>
     <string name="why_IT">
         Pourquoi choisir la spécialité Informatique ?
     </string>
+
+
+    <string name="content_why_IT">
+ Polytech forme des ingénieurs en Informatique qui possèdent à la fois les connaissances fondamentales et
+    la maîtrise des techniques les plus avancées de ce domaine et les préparer à accéder à des postes à responsabilité.\n
+    \n
+    La formation vise donc à :\n
+
+    \t - Inculquer les méthodes de travail nécessaires à la réalisation d\'un logiciel ou d\'une application complexe\n
+    \t - Développer la créativité, le sens de l\'initiative et l\'autonomie\n
+    \t - Mettre en situation professionnelle les élèves : projets et stages\n
+    </string>
     <string name="why_android">
         Pourquoi faire de l\'Android ?
+    </string>
+    <string name="content_why_android">
+     Tout d \'abord, au niveau des outils :\n
+        Une application est développée à l\'aide du SDK android et de l\'IDE eclipse avec le plugin crée par google. À ce niveau-là, le développeur n\'a pas besoin de débourser d\'argent.\n\n
+
+        Une appli android est codé à l\'aide de deux langages :\n
+        Tout d\'abord, l\'interface se développe en XML et le reste de l\'appli en java. Deux langages déjà très populaire et dont les notions sont utiles pas seulement pour android.\n\n
+
+        Aucun OS spécifiques requit :\n
+        Étant donné qu\'eclipse est codé en java, cette IDE fonctionne sur tous les OS qui supporte une machine virtuelle java (Qui est présent sous Windows, Mac OSX, ainsi que la plupart des distributions Linux).\n\n
+
+        Possible rémunération même si l\'appli est gratuite :\n
+        Il est possible d\'insérer des pubs ad-sense pour avoir une petite rémunération pour une appli gratuite.
+        À ce niveau, Google possède une certaine avance, grâce à son expérience dans la pub en ligne, ainsi qu\'une étude récente prouvant que les utilisateurs
+        android clique plus sur ses pubs que ceux possédant un iphone.
+
     </string>
 </resources>
