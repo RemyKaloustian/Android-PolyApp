@@ -3,9 +3,12 @@ package com.unrealandroid.polyapp.projet_news;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.unrealandroid.polyapp.AsyncTaskImageSmart;
@@ -20,6 +23,8 @@ import java.io.FileNotFoundException;
  */
 public class SingleProject extends AppCompatActivity {
 
+    private final static String COLOR_FULLY_TRANSPARENT = "#00000000";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +33,15 @@ public class SingleProject extends AppCompatActivity {
         Intent intent = getIntent();
         Project project = intent.getParcelableExtra("Project");
 
-        TextView title = (TextView) findViewById(R.id.project_title);
-        title.setText(project.getTitle());
+        /**** Title settings in the Appbar ****/
+
+        CollapsingToolbarLayout colapse = (CollapsingToolbarLayout) findViewById(R.id.project_collapsing);
+        colapse.setTitle(project.getTitle());
+        colapse.setCollapsedTitleTextColor(Color.parseColor("#C5EFF7")); // Sets the color of the title when appbar is collapsed
+        colapse.setCollapsedTitleTypeface(Typeface.create((Typeface)null, Typeface.BOLD));
+        colapse.setExpandedTitleColor(Color.parseColor(COLOR_FULLY_TRANSPARENT)); // "No title" when the image is not scrolled
+
+        /**** Settings of the textViews ****/
 
         TextView content = (TextView) findViewById(R.id.project_content);
         content.setText(project.getContent());
