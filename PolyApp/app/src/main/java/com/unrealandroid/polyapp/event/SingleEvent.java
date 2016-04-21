@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -116,8 +117,10 @@ public class SingleEvent extends AppCompatActivity {
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("Bibu");
-        collapsingToolbar.setCollapsedTitleTextColor(R.color.white);
+        collapsingToolbar.setTitle(event.getTitle());
+        collapsingToolbar.setExpandedTitleColor(Color.parseColor("#00000000"));
+        //collapsingToolbar.setCollapsedTitleTextColor(R.color.white);
+        collapsingToolbar.setCollapsedTitleTextColor(Color.parseColor("#C5EFF7"));
 
 
         if(bitmap != null)
