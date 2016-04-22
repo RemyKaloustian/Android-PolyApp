@@ -87,7 +87,7 @@ public class SingleProject extends AppCompatActivity implements View.OnClickList
                         + "\n\n" + "Participants : " + project.getParticipants());
 
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setType("text/plain");
+                emailIntent.setType("text/plain"); // MIME french definition = text/plain : données textuelles.
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Regarde ce projet !");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, bodyMail);
                 emailIntent.setData(Uri.parse("mailto:")); // For an empty "send to"
