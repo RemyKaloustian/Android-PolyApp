@@ -76,4 +76,15 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/project.mailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/gmail"
+        app:layout_anchor="@id/project.appBar"
+        app:backgroundTint="#EC644B"
+        app:layout_anchorGravity="bottom|right">
+        </android.support.design.widget.FloatingActionButton>
+
 </android.support.design.widget.CoordinatorLayout>

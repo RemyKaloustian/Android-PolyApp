@@ -5,10 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.unrealandroid.polyapp.AsyncTaskImageSmart;
@@ -21,9 +24,10 @@ import java.io.FileNotFoundException;
 /**
  * Created by Charly on 06/04/2016.
  */
-public class SingleProject extends AppCompatActivity {
+public class SingleProject extends AppCompatActivity implements View.OnClickListener{
 
     private final static String COLOR_FULLY_TRANSPARENT = "#00000000";
+    private Project project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,7 @@ public class SingleProject extends AppCompatActivity {
         setContentView(R.layout.single_project);
 
         Intent intent = getIntent();
-        Project project = intent.getParcelableExtra("Project");
+        project = intent.getParcelableExtra("Project");
 
         /**** Title settings in the Appbar ****/
 
@@ -65,6 +69,33 @@ public class SingleProject extends AppCompatActivity {
         {
             AsyncTaskImageSmart asyncTaskImage = new AsyncTaskImageSmart(image, project);
             asyncTaskImage.execute(project.getImage());
+        }
+
+        /**** Mail button events ****/
+
+        FloatingActionButton mailButton = (FloatingActionButton) findViewById(R.id.project_mailButton);
+        mailButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.project_mailButton :
+            {
+                String bodyMail = new String(project.getTitle() + "\n\n" + project.getContent()
+                        + "\n\n" + "Participants : " + project.getParticipants());
+
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Regarde ce projet !");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, bodyMail);
+                emailIntent.setData(Uri.parse("mailto:")); // For an empty "send to"
+                emailIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // To go to singleProject when the user presses back
+                                                                     // instead of returning to the mail app.
+                startActivity(emailIntent);
+
+            }
         }
     }
 }
