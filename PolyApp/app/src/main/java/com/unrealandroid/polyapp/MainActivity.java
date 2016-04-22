@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return "PROJETS";
                 case 3:
-                    return "EVENEMENTS";
+                    return "EVENTS";
             }
             return null;
         }
