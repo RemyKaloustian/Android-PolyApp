@@ -84,6 +84,10 @@ public class Event implements Parcelable{
         return imagePath;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     public void setBitmap(Bitmap bitmap){
         this.bitmap = bitmap;
     }

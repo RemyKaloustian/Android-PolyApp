@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     protected static String DB_PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/";
-    protected static String DB_NAME = "Database.db";
+    protected static String DB_NAME = "PolyNewsDB.db";
 
     protected SQLiteDatabase myDataBase;
     private final Context myContext;

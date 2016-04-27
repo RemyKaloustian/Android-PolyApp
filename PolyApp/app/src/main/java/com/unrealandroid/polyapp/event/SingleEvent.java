@@ -1,15 +1,10 @@
 package com.unrealandroid.polyapp.event;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -21,26 +16,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.unrealandroid.polyapp.AsyncTaskImage;
 import com.unrealandroid.polyapp.DBHelper;
 import com.unrealandroid.polyapp.R;
-import com.unrealandroid.polyapp.projet_news.Project;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 
 /**
@@ -91,7 +85,17 @@ public class SingleEvent extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageSingleEvent);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.add_calendar);
-        //floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(R.color.colorPrimary));
+
+        final Calendar mydate = new GregorianCalendar();
+        Date thedate = null;
+        try {
+            thedate = new SimpleDateFormat("MMMM d, yyyy", Locale.FRANCE).parse(event.getDate());
+            mydate.setTime(thedate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +104,7 @@ public class SingleEvent extends AppCompatActivity {
                 calIntent.putExtra(CalendarContract.Events.TITLE, event.getTitle());
                 calIntent.putExtra(CalendarContract.Events.DESCRIPTION, event.getContent());
 
-                GregorianCalendar calDate = new GregorianCalendar(2016, 4, 21);
+                GregorianCalendar calDate = new GregorianCalendar(mydate.get(Calendar.YEAR), mydate.get(Calendar.MONTH), mydate.get(Calendar.DAY_OF_MONTH));
                 calIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
                 calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
                         calDate.getTimeInMillis());
@@ -119,14 +123,11 @@ public class SingleEvent extends AppCompatActivity {
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(event.getTitle());
         collapsingToolbar.setExpandedTitleColor(Color.parseColor("#00000000"));
-        //collapsingToolbar.setCollapsedTitleTextColor(R.color.white);
         collapsingToolbar.setCollapsedTitleTextColor(Color.parseColor("#C5EFF7"));
 
 
         if(bitmap != null)
             imageView.setImageBitmap(bitmap);
-        //AsyncTaskImage asyncTaskImage = new AsyncTaskImage(imageView);
-        //asyncTaskImage.execute(event.getImagePath());
         title.setText(event.getTitle());
         title.setTypeface(null, Typeface.BOLD);
         content.setText(event.getContent());
