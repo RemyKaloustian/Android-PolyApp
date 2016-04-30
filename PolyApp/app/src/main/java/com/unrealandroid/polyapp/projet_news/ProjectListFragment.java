@@ -103,7 +103,7 @@ public class ProjectListFragment extends Fragment implements AdapterView.OnItemC
 
         gridView.setAdapter(adapter);
 
-        /***********************/
+        /**** Events *****/
 
         CardView firstCard = (CardView) getView().findViewById(R.id.firstCard);
 
